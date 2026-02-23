@@ -14,10 +14,20 @@
     <div class="topbar-controls">
       <label class="search-wrap" for="searchInput">
         <span class="sr-only">Search</span>
+        <span class="search-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="16" height="16">
+            <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"></circle>
+            <path d="M20 20L16.5 16.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+          </svg>
+        </span>
         <input id="searchInput" type="search" placeholder="Search team or match" autocomplete="off" />
       </label>
       <button id="refreshBtn" type="button">Refresh</button>
-      <button id="themeBtn" type="button" aria-label="Toggle theme">Theme</button>
+      <button id="themeBtn" class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+        <span class="sun" aria-hidden="true">☀</span>
+        <span class="moon" aria-hidden="true">☾</span>
+        <span class="knob" aria-hidden="true"></span>
+      </button>
     </div>
   </header>
 

@@ -45,6 +45,7 @@ function wireEvents() {
   el.themeBtn.addEventListener('click', () => {
     document.body.classList.toggle('dark');
     localStorage.setItem('plfs-theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+    syncThemeToggle();
   });
 
   el.searchInput.addEventListener('input', () => {
@@ -58,6 +59,12 @@ function applySavedTheme() {
   if (localStorage.getItem('plfs-theme') === 'dark') {
     document.body.classList.add('dark');
   }
+  syncThemeToggle();
+}
+
+function syncThemeToggle() {
+  const dark = document.body.classList.contains('dark');
+  el.themeBtn.setAttribute('aria-pressed', dark ? 'true' : 'false');
 }
 
 async function loadAll() {
