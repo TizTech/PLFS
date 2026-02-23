@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PLFS</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>PLFS</h1>
+    <p>Live tracker for football</p>
+
+    <div class="topbar-controls">
+      <label class="search-wrap" for="searchInput">
+        <span class="sr-only">Search</span>
+        <input id="searchInput" type="search" placeholder="Search team or match" autocomplete="off" />
+      </label>
+      <button id="refreshBtn" type="button">Refresh</button>
+      <button id="themeBtn" type="button" aria-label="Toggle theme">Theme</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <div class="section-head">
+        <h2>Matches</h2>
+        <div id="dateTabs" class="date-tabs" role="tablist" aria-label="Select date">
+          <button type="button" data-offset="-1">Yesterday</button>
+          <button type="button" data-offset="0" class="active">Today</button>
+          <button type="button" data-offset="1">Tomorrow</button>
+        </div>
+      </div>
+      <p id="statusText" class="muted">Loading live data...</p>
+      <div id="matches" class="matches"></div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <h2>Premier League Table</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Team</th>
+              <th>P</th>
+              <th>W</th>
+              <th>D</th>
+              <th>L</th>
+              <th>GF</th>
+              <th>GA</th>
+              <th>GD</th>
+              <th>Pts</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
