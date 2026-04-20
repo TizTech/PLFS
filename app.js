@@ -20,12 +20,14 @@ const el = {
   statusText: document.getElementById('statusText'),
   dateTabs: document.getElementById('dateTabs'),
   refreshBtn: document.getElementById('refreshBtn'),
+  themeBtn: document.getElementById('themeBtn'),
   searchInput: document.getElementById('searchInput')
 };
 
 init();
 
 function init() {
+  applySavedTheme();
   wireLanding();
   wireEvents();
 }
@@ -58,11 +60,29 @@ function wireEvents() {
 
   el.refreshBtn.addEventListener('click', loadAll);
 
+  el.themeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    localStorage.setItem('plfs-theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+    syncThemeToggle();
+  });
+
   el.searchInput.addEventListener('input', () => {
     state.search = el.searchInput.value.trim().toLowerCase();
     renderMatches();
     renderTable();
   });
+}
+
+function applySavedTheme() {
+  if (localStorage.getItem('plfs-theme') === 'dark') {
+    document.body.classList.add('dark');
+  }
+  syncThemeToggle();
+}
+
+function syncThemeToggle() {
+  const dark = document.body.classList.contains('dark');
+  el.themeBtn.setAttribute('aria-pressed', dark ? 'true' : 'false');
 }
 
 async function loadAll() {

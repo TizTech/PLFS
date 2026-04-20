@@ -9,7 +9,7 @@ PLFS is a one-page Premier League dashboard and live tracker for football.
 - Match status and scorelines
 - Current Premier League table
 - Quick search filter for teams and matches
-- Fixed light mode interface
+- Dark/light theme toggle
 
 ## Data Source
 
@@ -26,7 +26,7 @@ PLFS is a one-page Premier League dashboard and live tracker for football.
 
 - `index.html` - single dashboard layout
 - `styles.css` - simple responsive styling
-- `app.js` - live fetch, rendering, filtering
+- `app.js` - live fetch, rendering, filtering, theme toggle
 - `README.md` - project notes
 
 ## Future Improvements

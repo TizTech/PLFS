@@ -16,6 +16,22 @@
   --landing-teal: #3ccfcf;
 }
 
+body.dark {
+  --bg: #0f172a;
+  --card: #111827;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --line: #1f2937;
+  --accent: #60a5fa;
+  --control-bg: #0b1220;
+  --shadow-soft: 0 10px 28px rgba(2, 6, 23, 0.45);
+  --landing-ink: #f2f5ff;
+  --landing-soft: #b7c0db;
+  --landing-cream: #0d1326;
+  --landing-coral: #ff7b67;
+  --landing-teal: #53d7ce;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -56,6 +72,13 @@ h2 {
     radial-gradient(circle at 85% 10%, color-mix(in srgb, var(--landing-coral) 45%, #fff 55%) 0%, transparent 44%),
     linear-gradient(145deg, var(--landing-cream) 0%, #fff 42%, #f2fbff 100%);
   color: var(--landing-ink);
+}
+
+body.dark .landing {
+  background:
+    radial-gradient(circle at 12% 18%, color-mix(in srgb, var(--landing-teal) 20%, #0a1226 80%) 0%, transparent 48%),
+    radial-gradient(circle at 85% 10%, color-mix(in srgb, var(--landing-coral) 24%, #0a1226 76%) 0%, transparent 44%),
+    linear-gradient(145deg, #0d1326 0%, #0a1020 46%, #0a1426 100%);
 }
 
 .landing-grid {
@@ -125,12 +148,24 @@ h2 {
   color: #0f5f68;
 }
 
+body.dark .cta-secondary {
+  border-color: color-mix(in srgb, var(--landing-teal) 50%, #fff 20%);
+  background: color-mix(in srgb, var(--landing-teal) 20%, #0f1b33 80%);
+  color: #b8f8f2;
+}
+
 .landing-preview {
   border: 1px solid color-mix(in srgb, var(--landing-ink) 12%, #fff 88%);
   border-radius: 1.1rem;
   padding: clamp(0.9rem, 2.4vw, 1.3rem);
   background: color-mix(in srgb, #fff 85%, #fdeedf 15%);
   box-shadow: 0 22px 44px rgba(17, 24, 39, 0.1);
+}
+
+body.dark .landing-preview {
+  border-color: color-mix(in srgb, var(--landing-ink) 18%, #0e182d 82%);
+  background: color-mix(in srgb, #0f1b33 80%, #2f1e2a 20%);
+  box-shadow: 0 22px 44px rgba(2, 6, 23, 0.52);
 }
 
 .preview-tag {
@@ -152,6 +187,11 @@ h2 {
   gap: 0.4rem;
   padding: 0.75rem;
   align-items: center;
+}
+
+body.dark .preview-score {
+  border-color: #2d3b58;
+  background: #101a30;
 }
 
 .preview-score span:last-child {
@@ -178,6 +218,10 @@ h2 {
 
 .landing-highlights li {
   color: #2e2551;
+}
+
+body.dark .landing-highlights li {
+  color: #d8dff4;
 }
 
 #scoresView {
@@ -221,10 +265,10 @@ h2 {
 
 .topbar-controls {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr auto auto;
   grid-template-areas:
-    "search search"
-    "refresh .";
+    "search search search"
+    "refresh theme .";
   gap: 0.55rem;
 }
 
@@ -246,6 +290,10 @@ button {
 
 #refreshBtn {
   grid-area: refresh;
+}
+
+#themeBtn {
+  grid-area: theme;
 }
 
 .search-icon {
@@ -330,6 +378,37 @@ input:focus-visible {
   border-color: var(--accent);
 }
 
+.theme-toggle {
+  position: relative;
+  width: 72px;
+  border-radius: 999px;
+  padding: 0.45rem 0.55rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--muted);
+}
+
+.theme-toggle .knob {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1px solid var(--line);
+  transition: transform 0.2s ease;
+}
+
+.theme-toggle[aria-pressed="true"] .knob {
+  transform: translateX(36px);
+}
+
+.theme-toggle[aria-pressed="true"] {
+  color: var(--accent);
+}
+
 .muted {
   color: var(--muted);
   margin: 0.45rem 0 0.85rem;
@@ -399,6 +478,12 @@ input:focus-visible {
   color: #b91c1c;
   border-color: #fecaca;
   background: #fef2f2;
+}
+
+body.dark .badge.live {
+  color: #fca5a5;
+  background: #2b1315;
+  border-color: #3f1d1f;
 }
 
 .table-wrap {
@@ -481,10 +566,10 @@ tr.bottom3 {
 
 @media (max-width: 520px) {
   .topbar-controls {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr auto;
     grid-template-areas:
-      "search"
-      "refresh";
+      "search search"
+      "refresh theme";
   }
 
   .match .row:first-child strong {
@@ -522,11 +607,12 @@ tr.bottom3 {
     grid-column: 2 / 3;
     justify-self: end;
     width: min(560px, 100%);
-    grid-template-columns: 1fr auto;
-    grid-template-areas: "search refresh";
+    grid-template-columns: 1fr auto auto;
+    grid-template-areas: "search refresh theme";
   }
 
-  #refreshBtn {
+  #refreshBtn,
+  #themeBtn {
     min-width: max-content;
   }
 }
