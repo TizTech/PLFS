@@ -2,7 +2,8 @@ const state = {
   selectedOffset: 0,
   matches: [],
   standings: [],
-  search: ''
+  search: '',
+  hasLoaded: false
 };
 
 const api = {
@@ -11,21 +12,36 @@ const api = {
 };
 
 const el = {
+  landing: document.getElementById('landing'),
+  scoresView: document.getElementById('scoresView'),
+  startBtn: document.getElementById('startBtn'),
   matches: document.getElementById('matches'),
   tableBody: document.getElementById('tableBody'),
   statusText: document.getElementById('statusText'),
   dateTabs: document.getElementById('dateTabs'),
   refreshBtn: document.getElementById('refreshBtn'),
-  themeBtn: document.getElementById('themeBtn'),
   searchInput: document.getElementById('searchInput')
 };
 
 init();
 
 function init() {
-  applySavedTheme();
+  wireLanding();
   wireEvents();
-  loadAll();
+}
+
+function wireLanding() {
+  el.startBtn.addEventListener('click', enterMatchCenter);
+}
+
+function enterMatchCenter() {
+  el.landing.hidden = true;
+  el.scoresView.hidden = false;
+  if (!state.hasLoaded) {
+    state.hasLoaded = true;
+    loadAll();
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function wireEvents() {
@@ -42,29 +58,11 @@ function wireEvents() {
 
   el.refreshBtn.addEventListener('click', loadAll);
 
-  el.themeBtn.addEventListener('click', () => {
-    document.body.classList.toggle('dark');
-    localStorage.setItem('plfs-theme', document.body.classList.contains('dark') ? 'dark' : 'light');
-    syncThemeToggle();
-  });
-
   el.searchInput.addEventListener('input', () => {
     state.search = el.searchInput.value.trim().toLowerCase();
     renderMatches();
     renderTable();
   });
-}
-
-function applySavedTheme() {
-  if (localStorage.getItem('plfs-theme') === 'dark') {
-    document.body.classList.add('dark');
-  }
-  syncThemeToggle();
-}
-
-function syncThemeToggle() {
-  const dark = document.body.classList.contains('dark');
-  el.themeBtn.setAttribute('aria-pressed', dark ? 'true' : 'false');
 }
 
 async function loadAll() {

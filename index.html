@@ -7,69 +7,98 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="topbar">
-    <h1>PLFS</h1>
-    <p>Live tracker for football</p>
-
-    <div class="topbar-controls">
-      <label class="search-wrap" for="searchInput">
-        <span class="sr-only">Search</span>
-        <span class="search-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="16" height="16">
-            <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"></circle>
-            <path d="M20 20L16.5 16.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
-          </svg>
-        </span>
-        <input id="searchInput" type="search" placeholder="Search team or match" autocomplete="off" />
-      </label>
-      <button id="refreshBtn" type="button">Refresh</button>
-      <button id="themeBtn" class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
-        <span class="sun" aria-hidden="true">☀</span>
-        <span class="moon" aria-hidden="true">☾</span>
-        <span class="knob" aria-hidden="true"></span>
-      </button>
-    </div>
-  </header>
-
-  <main class="container">
-    <section class="card">
-      <div class="section-head">
-        <h2>Matches</h2>
-        <div id="dateTabs" class="date-tabs" role="tablist" aria-label="Select date">
-          <button type="button" data-offset="-1">Yesterday</button>
-          <button type="button" data-offset="0" class="active">Today</button>
-          <button type="button" data-offset="1">Tomorrow</button>
+  <section id="landing" class="landing">
+    <div class="landing-grid">
+      <div class="landing-copy">
+        <p class="eyebrow">Premier League Live Hub</p>
+        <h1>Catch every momentum swing before you open the scoreboard.</h1>
+        <p class="landing-lead">
+          PLFS gives you live match snapshots, quick search, and table movement tracking from one clean match center.
+        </p>
+        <div class="landing-actions">
+          <button id="startBtn" class="cta-primary" type="button">Enter Live Match Center</button>
+          <a class="cta-secondary" href="#landingHighlights">See highlights</a>
         </div>
       </div>
-      <p id="statusText" class="muted">Loading live data...</p>
-      <div id="matches" class="matches"></div>
-    </section>
 
-    <section class="card">
-      <div class="section-head">
-        <h2>Premier League Table</h2>
+      <aside class="landing-preview" aria-label="Preview">
+        <p class="preview-tag">Live pulse</p>
+        <div class="preview-score">
+          <span>Arsenal</span>
+          <strong>2 - 1</strong>
+          <span>Chelsea</span>
+        </div>
+        <p class="preview-meta">Example live card preview</p>
+        <ul id="landingHighlights" class="landing-highlights">
+          <li>Yesterday, today, and tomorrow fixtures</li>
+          <li>Current Premier League standings</li>
+          <li>Fast team and match search</li>
+          <li>Responsive view for mobile and desktop</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <div id="scoresView" hidden>
+    <header class="topbar">
+      <h1>PLFS</h1>
+      <p>Live tracker for football</p>
+
+      <div class="topbar-controls">
+        <label class="search-wrap" for="searchInput">
+          <span class="sr-only">Search</span>
+          <span class="search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16">
+              <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"></circle>
+              <path d="M20 20L16.5 16.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+          </span>
+          <input id="searchInput" type="search" placeholder="Search team or match" autocomplete="off" />
+        </label>
+        <button id="refreshBtn" type="button">Refresh</button>
       </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Team</th>
-              <th>P</th>
-              <th>W</th>
-              <th>D</th>
-              <th>L</th>
-              <th>GF</th>
-              <th>GA</th>
-              <th>GD</th>
-              <th>Pts</th>
-            </tr>
-          </thead>
-          <tbody id="tableBody"></tbody>
-        </table>
-      </div>
-    </section>
-  </main>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <div class="section-head">
+          <h2>Matches</h2>
+          <div id="dateTabs" class="date-tabs" role="tablist" aria-label="Select date">
+            <button type="button" data-offset="-1">Yesterday</button>
+            <button type="button" data-offset="0" class="active">Today</button>
+            <button type="button" data-offset="1">Tomorrow</button>
+          </div>
+        </div>
+        <p id="statusText" class="muted">Loading live data...</p>
+        <div id="matches" class="matches"></div>
+      </section>
+
+      <section class="card">
+        <div class="section-head">
+          <h2>Premier League Table</h2>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Team</th>
+                <th>P</th>
+                <th>W</th>
+                <th>D</th>
+                <th>L</th>
+                <th>GF</th>
+                <th>GA</th>
+                <th>GD</th>
+                <th>Pts</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
 
   <script src="app.js"></script>
 </body>
